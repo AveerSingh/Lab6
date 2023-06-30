@@ -22,7 +22,7 @@ void loop()
 
   display.clearDisplay();
 
-  display.setTextSize(2);
+  display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
 
@@ -30,12 +30,17 @@ void loop()
   int reading = analogRead(TMP36_PIN);
   double voltage = (reading * 3.3) / 4095.0;
 
-  // Calculate temperature based on voltage
-  double temperature = (voltage - 0.5) * 100.0;
+  // Calculate temperature in Celsius and Fahrenheit
+  double temperatureCelsius = (voltage - 0.5) * 100.0;
+  double temperatureFahrenheit = (temperatureCelsius * 9.0 / 5.0) + 32.0;
 
-  // Print the temperature on the display
-  display.print("Temperature: ");
-  display.println(temperature, 2);
+  // Print the temperature in Celsius on the display
+  display.print("Temperature (C): ");
+  display.println(temperatureCelsius, 2);
+
+  // Print the temperature in Fahrenheit on the display
+  display.print("Temperature (F): ");
+  display.println(temperatureFahrenheit, 2);
+
   display.display();
 }
-
